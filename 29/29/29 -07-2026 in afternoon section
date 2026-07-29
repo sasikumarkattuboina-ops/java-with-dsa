@@ -1,0 +1,121 @@
+Wirte a program to find a max between two numbers 
+program:
+import java.util.Scanner;
+
+public class MaxTwoNumbers {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = sc.nextInt();
+
+        if (a > b) {
+            System.out.println("Maximum number is: " + a);
+        } else if (b > a) {
+            System.out.println("Maximum number is: " + b);
+        } else {
+            System.out.println("Both numbers are equal");
+        }
+    }
+}
+ output:
+Enter first number: 124
+Enter second number: 2355
+Maximum number is: 2355
+
+Witer a program to find a max between the three numbers 
+import java.util.Scanner;
+
+public class MaxThreeNumbers {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = sc.nextInt();
+
+        System.out.print("Enter third number: ");
+        int c = sc.nextInt();
+
+        if (a >= b && a >= c) {
+            System.out.println("Maximum number is: " + a);
+        } else if (b >= a && b >= c) {
+            System.out.println("Maximum number is: " + b);
+        } else {
+            System.out.println("Maximum number is: " + c);
+        }
+    }
+}
+output 
+Enter first number: 12
+Enter second number: 12
+Enter third number: 45
+Maximum number is: 45
+
+Wirte a program to check whether  a character this aplhabet or not 
+import java.util.Scanner;
+
+public class CheckAlphabet {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a character: ");
+        char ch = sc.next().charAt(0);
+
+        if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+            System.out.println(ch + " is an alphabet");
+        } else {
+            System.out.println(ch + " is not an alphabet");
+        }
+    }
+}
+output  
+Enter a character: 7
+7 is not an alphabet
+
+Wirte a program to input any alphabet and check whether it's vowel are consonant
+import java.util.Scanner;
+public class TernaryPractice {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+      System.out.print("Enter an alphabet: ");
+        char ch2 = sc.next().charAt(0);
+        char lower = Character.toLowerCase(ch2);
+        String vowelCheck = (lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u')
+                ? "Vowel" : "Consonant";
+        System.out.println(ch2 + " is: " + vowelCheck);
+    }
+}
+output 
+Enter an alphabet: a
+a is: Vowel
+Write a program to input to any character and check whether it is alphabet or digit or any special character.
+A).
+
+import java.util.Scanner;
+public class TernaryPractice {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+      System.out.print("Enter any character: ");
+        char ch3 = sc.next().charAt(0);
+        String type = Character.isLetter(ch3) ? "Alphabet"
+                : Character.isDigit(ch3) ? "Digit"
+                : "Special Character";
+        System.out.println(ch3 + " is: " + type);
+
+        sc.close();
+
+    }
+}
+output
+Enter any character: a
+a is: Alphabet
+
+
