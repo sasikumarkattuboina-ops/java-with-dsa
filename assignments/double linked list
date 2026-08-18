@@ -1,4 +1,4 @@
-foward:
+FORWARD:
 class Node {
     int data;
     Node prev;
