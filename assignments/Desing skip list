@@ -1,0 +1,170 @@
+import java.util.Random;
+
+class Skiplist {
+
+    private static final int MAX_LEVEL = 16;
+
+    class Node {
+        int val;
+        Node[] next;
+
+        Node(int val, int level) {
+            this.val = val;
+            this.next = new Node[level];
+        }
+    }
+
+    private Node head;
+    private int level;
+    private Random random;
+
+    public Skiplist() {
+        head = new Node(-1, MAX_LEVEL);
+        level = 1;
+        random = new Random();
+    }
+
+    // Generate random level
+    private int randomLevel() {
+        int lvl = 1;
+
+        while (random.nextDouble() < 0.5 && lvl < MAX_LEVEL) {
+            lvl++;
+        }
+
+        return lvl;
+    }
+
+    // Search
+    public boolean search(int target) {
+
+        Node current = head;
+
+        // Start from highest level
+        for (int i = level - 1; i >= 0; i--) {
+
+            while (current.next[i] != null &&
+                   current.next[i].val < target) {
+                current = current.next[i];
+            }
+        }
+
+        current = current.next[0];
+
+        return current != null && current.val == target;
+    }
+
+    // Add
+    public void add(int num) {
+
+        Node[] update = new Node[MAX_LEVEL];
+
+        Node current = head;
+
+        // Find position
+        for (int i = level - 1; i >= 0; i--) {
+
+            while (current.next[i] != null &&
+                   current.next[i].val < num) {
+                current = current.next[i];
+            }
+
+            update[i] = current;
+        }
+
+        // Generate level for new node
+        int newLevel = randomLevel();
+
+        // If new level is greater
+        if (newLevel > level) {
+            for (int i = level; i < newLevel; i++) {
+                update[i] = head;
+            }
+
+            level = newLevel;
+        }
+
+        Node newNode = new Node(num, newLevel);
+
+        // Insert node
+        for (int i = 0; i < newLevel; i++) {
+
+            newNode.next[i] = update[i].next[i];
+            update[i].next[i] = newNode;
+        }
+    }
+
+    // Erase
+    public boolean erase(int num) {
+
+        Node[] update = new Node[MAX_LEVEL];
+
+        Node current = head;
+
+        // Find node
+        for (int i = level - 1; i >= 0; i--) {
+
+            while (current.next[i] != null &&
+                   current.next[i].val < num) {
+                current = current.next[i];
+            }
+
+            update[i] = current;
+        }
+
+        current = current.next[0];
+
+        // Node not found
+        if (current == null || current.val != num) {
+            return false;
+        }
+
+        // Remove node
+        for (int i = 0; i < level; i++) {
+
+            if (update[i].next[i] != current) {
+                break;
+            }
+
+            update[i].next[i] = current.next[i];
+        }
+
+        // Reduce level if necessary
+        while (level > 1 && head.next[level - 1] == null) {
+            level--;
+        }
+
+        return true;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Skiplist skiplist = new Skiplist();
+
+        skiplist.add(1);
+        skiplist.add(2);
+        skiplist.add(3);
+
+        System.out.println(skiplist.search(0)); // false
+
+        skiplist.add(4);
+
+        System.out.println(skiplist.search(1)); // true
+        System.out.println(skiplist.search(4)); // true
+
+        System.out.println(skiplist.erase(0)); // false
+        System.out.println(skiplist.erase(1)); // true
+
+        System.out.println(skiplist.search(1)); // false
+    }
+}
+
+
+output:
+false 
+ture 
+false 
+ture
