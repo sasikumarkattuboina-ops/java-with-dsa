@@ -1,0 +1,39 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Main {
+
+    static int getDecimalValue(Node head) {
+        int result = 0;
+
+        while (head != null) {
+            result = result * 2 + head.data;
+            head = head.next;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        Node head = new Node(1);
+        head.next = new Node(0);
+        head.next.next = new Node(1);
+        head.next.next.next = new Node(1);
+
+        int answer = getDecimalValue(head);
+
+        System.out.println(answer);
+    }
+}
+
+
+output:
+11
