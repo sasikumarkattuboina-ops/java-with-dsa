@@ -1,0 +1,28 @@
+class Student {
+    // Private variable
+    private String name;
+
+    // Setter method
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter method
+    public String getName() {
+        return name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Student s = new Student();
+
+        s.setName("Charan");
+
+        System.out.println(s.getName());
+    }
+}
+
+output:
+Charan
